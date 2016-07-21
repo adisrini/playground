@@ -1,14 +1,15 @@
 package hashing.implementations;
 
-public class Murmur {
+public class Murmur extends Hasher {
     
     private static final int seed = 0x9747b28c;
     
-    public static int hash32(String key) {
+    @Override
+    public int hash32(String key) {
         return hash32(key.getBytes(), key.length(), seed);
     }
     
-    private static int hash32(byte[] data, int length, int seed) {
+    private int hash32(byte[] data, int length, int seed) {
         final int m = 0x5bd1e995;
         final int r = 24;
         

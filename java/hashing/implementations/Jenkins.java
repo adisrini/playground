@@ -1,14 +1,15 @@
 package hashing.implementations;
 
-public class Jenkins {
+public class Jenkins extends Hasher {
     
     private static final int s1 = 10;
     private static final int s2 = 6;
     private static final int s3 = 3;
     private static final int s4 = 11;
     private static final int s5 = 15;
-    
-    public static int one_at_a_time_hash32(String key) {
+
+    @Override
+    public int hash32(String key) {
         int length = key.length();
         int hash, i;
         
