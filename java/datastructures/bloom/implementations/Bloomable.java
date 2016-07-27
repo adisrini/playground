@@ -1,4 +1,4 @@
-package datastructures.implementations;
+package datastructures.bloom.implementations;
 
 public interface Bloomable<E> {
     

@@ -1,8 +1,8 @@
-package datastructures.test;
+package datastructures.bloom.test;
 
 import org.junit.Test;
 
-import datastructures.implementations.BloomFilter;
+import datastructures.bloom.implementations.BloomFilter;
 
 import java.util.Set;
 

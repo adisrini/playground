@@ -1,4 +1,4 @@
-package datastructures.implementations;
+package datastructures.bloom.implementations;
 
 import java.util.Arrays;
 import java.util.HashSet;

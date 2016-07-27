@@ -18,6 +18,7 @@ public abstract class BaseTest {
             System.out.println("TEST FAILURE in " + description.getMethodName()
                     + ": " + t.getMessage());
             System.out.println("----------------------------------\n");
+            t.printStackTrace();
         }
 
         @Override
