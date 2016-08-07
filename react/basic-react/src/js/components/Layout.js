@@ -1,9 +1,15 @@
 import React from "react";
 
+import Footer from "./Footer";
+import Header from "./Header";
+
 export default class Layout extends React.Component {
   render() {
     return (
-      <h1>Hello, React!</h1>
+      <div>
+        <Header/>
+        <Footer/>
+      </div>
     );
   }
 }
