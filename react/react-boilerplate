@@ -1,0 +1,126 @@
+npm init
+sudo npm install --save webpack
+sudo npm install --save webpack-dev-server -g
+npm install --save react
+npm install --save react-dom
+npm install --save babel-loader
+npm install --save babel-core
+npm install --save babel-preset-es2015
+npm install --save babel-preset-react
+npm install --save babel-preset-stage-0
+npm install --save babel-plugin-add-module-exports
+npm install --save babel-plugin-react-html-attrs
+npm install --save babel-plugin-transform-class-properties
+npm install --save babel-plugin-transform-decorators-legacy
+
+echo "Installed all node modules!"
+
+echo "Writing web.config.js..."
+
+cat >webpack.config.js <<EOM
+var debug = process.env.NODE_ENV !== "production";
+var webpack = require('webpack');
+var path = require('path');
+
+module.exports = {
+  context: path.join(__dirname, "src"),
+  devtool: debug ? "inline-sourcemap" : null,
+  entry: "./js/client.js",
+  module: {
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['react', 'es2015', 'stage-0'],
+          plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
+        }
+      }
+    ]
+  },
+  output: {
+    path: __dirname + "/src/",
+    filename: "client.min.js"
+  },
+  plugins: debug ? [] : [
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
+  ],
+};
+EOM
+
+echo "Creating src directory..."
+
+mkdir src
+
+echo "Writing to src/index.html..."
+
+cat >src/index.html <<EOM
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React App</title>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <script src="client.min.js"></script>
+  </body>
+</html>
+EOM
+
+echo "Creating src/js directory..."
+
+mkdir src/js
+
+echo "Writing to src/js/client.js..."
+
+cat >src/js/client.js <<EOM
+import React from "react";
+import ReactDOM from "react-dom";
+
+import Layout from "./components/Layout";
+
+const app = document.getElementById('app');
+ReactDOM.render(<Layout/>, app);
+EOM
+
+echo "Creating src/js/components directory..."
+
+mkdir src/js/components
+
+echo "Writing to src/js/components/Layout.js..."
+
+cat >src/js/components/Layout.js <<EOM
+import React from "react";
+
+export default class Layout extends React.Component {
+  render() {
+    return (
+      <h1>Hello, React!</h1>
+    );
+  }
+}
+EOM
+
+echo "Adding dev script to package.json..."
+
+node > out_package.json <<EOF
+//Read data
+var data = require('./package.json');
+
+//Manipulate data
+data.scripts.dev = "./node_modules/.bin/webpack-dev-server --content-base src --inline --hot"
+
+//Output data
+console.log(JSON.stringify(data, null, "\t"));
+EOF
+
+rm package.json
+
+mv out_package.json package.json
+
+echo "\nAll done! Run 'npm run dev' and open localhost:8080 in your browser to get started."
