@@ -113,7 +113,7 @@ node > out_package.json <<EOF
 var data = require('./package.json');
 
 //Manipulate data
-data.scripts.dev = "./node_modules/.bin/webpack-dev-server --content-base src --inline --hot"
+data.scripts.dev = "webpack-dev-server --content-base src --inline --hot"
 
 //Output data
 console.log(JSON.stringify(data, null, "\t"));
