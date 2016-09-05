@@ -30,7 +30,7 @@ public class TruthTable {
         engine = mgr.getEngineByName("JavaScript"); 
     }
     
-    public void evaluateExpression(String expression) {
+    public List<Boolean> evaluateExpression(String expression) {
         List<Boolean> values = new ArrayList<>();
         expressions.put(expression, values);
         for(int i = 0; i < table.length; i++) {
@@ -46,6 +46,7 @@ public class TruthTable {
                 e.printStackTrace();
             }
         }
+        return values;
     }
     
     public void display() {
