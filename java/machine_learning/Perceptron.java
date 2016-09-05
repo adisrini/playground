@@ -6,21 +6,23 @@ public class Perceptron {
     
     public double[] train(double[][] x, int[] y, double[] w) {
         int t = 1;
+        System.out.println("w(" + t + "): " + Arrays.toString(w));
         while(true) {
+            t++;
             boolean misclassified = false;
             for(int i = 0; i < x.length; i++) {
                 if(margin(x[i], y[i], w) <= 0) {
                     misclassified = true;
                     w = update(x[i], y[i], w);
+                    System.out.println("w(" + t + "): " + Arrays.toString(w));
                     break;
                 }
             }
             if(!misclassified) {
                 break;
             }
-            t++;
         }
-        System.out.println("Perceptron completed with " + (t-1) + " iterations (mistakes).");
+        System.out.println("Perceptron completed with " + (t-2) + " iterations (mistakes).");
         return w;
     }
     
