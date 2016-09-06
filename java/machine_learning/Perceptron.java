@@ -44,8 +44,8 @@ public class Perceptron {
     
     public static void main(String[] args) {
         Perceptron perceptron = new Perceptron();
-        double[][] x = {{-1, 1}, {0, -1}, {10, 1}};
-        int[] y = {1, -1, 1};
+        double[][] x = {{10, 1}, {-1, 1}, {0, -1}};
+        int[] y = {1, 1, -1};
         double[] w = {0, 0};
         double[] output = perceptron.train(x, y, w);
         System.out.println(Arrays.toString(output));

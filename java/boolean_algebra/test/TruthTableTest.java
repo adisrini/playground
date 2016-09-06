@@ -15,6 +15,17 @@ public class TruthTableTest {
         
         List<Boolean> values1 = table.evaluateExpression("(!x0 && !x1 && x2) || (x0 && !x1 && !x2) || (x0 && !x1 && x2) || (x0 && x1 && !x2)");
         List<Boolean> values2 = table.evaluateExpression("(!x1 && x2) || (x0 && !x2)");
+//        table.display();
+        
+        Assert.assertEquals(values1, values2);
+    }
+    
+    @Test
+    public void testEvaluation2() {
+        TruthTable table = new TruthTable(3);
+        
+        List<Boolean> values1 = table.evaluateExpression("(x1 && x2) || (!x1 && x0)");
+        List<Boolean> values2 = table.evaluateExpression("(x0 || x1) && (!x1 || x2)");
         table.display();
         
         Assert.assertEquals(values1, values2);
